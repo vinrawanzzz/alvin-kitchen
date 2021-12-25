@@ -111,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
             CarouselSlider(
               items: imageSliders,
               options: CarouselOptions(
-                  autoPlay: true, height: 200, pauseAutoPlayOnTouch: true),
+                  autoPlay: true, height: 250, pauseAutoPlayOnTouch: true),
             ),
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.9,

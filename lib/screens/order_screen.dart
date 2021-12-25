@@ -57,83 +57,87 @@ class _OrderScreenState extends State<OrderScreen> {
         backgroundColor: HexColor('#405FCF'),
         title: const Text('Order Food'),
       ),
-      body: Column(
-        children: [
-          const SizedBox(height: 5),
-          Center(
-            child: Container(
-              alignment: Alignment.center,
-              width: MediaQuery.of(context).size.width * 3.5 / 4,
-              height: MediaQuery.of(context).size.height * 1 / 8,
-              child: TextField(
-                textInputAction: TextInputAction.search,
-                onSubmitted: (val) {
-                  setState(() {
-                    search = val;
-                  });
-                },
-                controller: searchbar,
-                decoration: InputDecoration(
-                  hintText: 'Type name here...',
-                  prefixIcon: IconButton(
-                    icon: const Icon(Icons.search_sharp),
-                    onPressed: () {
-                      setState(() {
-                        search = searchbar.text;
-                      });
-                    },
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const SizedBox(height: 5),
+            Center(
+              child: Container(
+                alignment: Alignment.center,
+                width: MediaQuery.of(context).size.width * 3.5 / 4,
+                height: MediaQuery.of(context).size.height * 1 / 8,
+                child: TextField(
+                  textInputAction: TextInputAction.search,
+                  onSubmitted: (val) {
+                    setState(() {
+                      search = val;
+                    });
+                  },
+                  controller: searchbar,
+                  decoration: InputDecoration(
+                    hintText: 'Type name here...',
+                    prefixIcon: IconButton(
+                      icon: const Icon(Icons.search_sharp),
+                      onPressed: () {
+                        setState(() {
+                          search = searchbar.text;
+                        });
+                      },
+                    ),
+                    border: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(55))),
                   ),
-                  border: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(55))),
                 ),
               ),
             ),
-          ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 6 / 8,
-            child: ListView.builder(
-              itemBuilder: (context, index) {
-                return search == "null"
-                    ? Card(
-                        child: ListTile(
-                          leading: Image(
-                              image: NetworkImage(dataMakanan[index]['image'])),
-                          title: Text(dataMakanan[index]['title']),
-                          subtitle:
-                              Text(dataMakanan[index]['price'].toString()),
-                          trailing: TextButton(
-                              onPressed: () {
-                                Navigator.pop(context, dataMakanan[index]);
-                                // print(dataMakanan[index]);
-                              },
-                              child: const Text('Order')),
-                        ),
-                      )
-                    : dataMakanan[index]['title']
-                            .toUpperCase()
-                            .contains(search.toUpperCase())
-                        ? Card(
-                            child: ListTile(
-                              leading: Image(
-                                  image: NetworkImage(
-                                      dataMakanan[index]['image'])),
-                              title: Text(dataMakanan[index]['title']),
-                              subtitle:
-                                  Text(dataMakanan[index]['price'].toString()),
-                              trailing: TextButton(
-                                  onPressed: () {
-                                    Navigator.pop(context, dataMakanan[index]);
-                                    // print(dataMakanan[index]);
-                                  },
-                                  child: const Text('Order')),
-                            ),
-                          )
-                        : Container();
-              },
-              itemCount: dataMakanan.length,
-            ),
-          )
-        ],
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 6 / 8,
+              child: ListView.builder(
+                itemBuilder: (context, index) {
+                  return search == "null"
+                      ? Card(
+                          child: ListTile(
+                            leading: Image(
+                                image:
+                                    NetworkImage(dataMakanan[index]['image'])),
+                            title: Text(dataMakanan[index]['title']),
+                            subtitle:
+                                Text(dataMakanan[index]['price'].toString()),
+                            trailing: TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context, dataMakanan[index]);
+                                  // print(dataMakanan[index]);
+                                },
+                                child: const Text('Order')),
+                          ),
+                        )
+                      : dataMakanan[index]['title']
+                              .toUpperCase()
+                              .contains(search.toUpperCase())
+                          ? Card(
+                              child: ListTile(
+                                leading: Image(
+                                    image: NetworkImage(
+                                        dataMakanan[index]['image'])),
+                                title: Text(dataMakanan[index]['title']),
+                                subtitle: Text(
+                                    dataMakanan[index]['price'].toString()),
+                                trailing: TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(
+                                          context, dataMakanan[index]);
+                                      // print(dataMakanan[index]);
+                                    },
+                                    child: const Text('Order')),
+                              ),
+                            )
+                          : Container();
+                },
+                itemCount: dataMakanan.length,
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
